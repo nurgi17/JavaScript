@@ -48,3 +48,31 @@
 
 //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+// let box = document.querySelector('.box'),
+//     btn = document.querySelector('button');
+
+// //You can't change
+// // let width = box.clientWidth,
+// //     height = box.clientHeight;
+
+// // let width = box.offsetWidth,
+// //     height = box.offsetHeight;
+
+// let width = box.scrollWidth,
+//     height = box.scrollHeight;
+// //You can't change
+
+// console.log(box.getBoundingClientRect());// .left, .right, .top, .bottom, .height, .width, .x, .y
+// console.log(width);
+// console.log(height);
+// console.log(document.documentElement.clientWidth);
+// console.log(document.documentElement.clientHeight);
+// console.log(document.documentElement.scrollTop);
+
+// btn.addEventListener('click', function (e) {
+//     // box.style.height = box.scrollHeight + 'px';
+//     box.scrollTop = 0;// you can change
+// });
+
+// scrollBy(0, 200);// x, y
+// scrollTo(0, 200);
