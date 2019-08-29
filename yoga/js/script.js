@@ -2,7 +2,8 @@ window.addEventListener('DOMContentLoaded', function (e) {
     'use strict';
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
-        tabContent = document.querySelectorAll('.info-tabcontent');
+        tabContent = document.querySelectorAll('.info-tabcontent'),
+        desBtn = document.querySelectorAll('.description-btn');
 
     function hideTabContent(a) {
         for (let i = a; i < tabContent.length; i++) {
@@ -85,4 +86,27 @@ window.addEventListener('DOMContentLoaded', function (e) {
     }
     setClock('timer', deadline);
 
+
+    // Modal window
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+
+    function showModal() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    }
+
+    more.addEventListener('click', showModal);
+    close.addEventListener('click', closeModal);
+    for (let i = 0; i < desBtn.length; i++) {
+        desBtn[i].addEventListener('click', showModal);
+    }
 });

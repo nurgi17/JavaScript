@@ -63,18 +63,58 @@
 // }
 // showThis(4, 5);
 // showThis(5, 5);
-let obj = {
-    a: 20,
-    b: 15,
-    sum: function () {
-        console.log(this);
-        function shout() {
-            console.log(this);
-        }
-        shout();
-    }
-};
-obj.sum();
+// let obj = {
+//     a: 20,
+//     b: 15,
+//     sum: function () {
+//         console.log(this);
+//         function shout() {
+//             console.log(this);
+//         }
+//         shout();
+//     }
+// };
+// obj.sum();
 
-//1-> Просто вызов функции вывод:-> window or undefined 
+// let user = {
+//     name: 'John'
+// };
+// function sayName(surname) {
+//     console.log(this);
+//     console.log(this.name + ' ' + surname);
+// }
+// console.log(sayName.call(user, 'Newman'));
+// console.log(sayName.apply(user, ['Snow']));
+
+// function count(number) {
+//     return this * number;
+// }
+
+// let double = count.bind(2);
+// console.log(double(3));
+// console.log(double(10));
+
+// let btn = document.querySelector('button');
+// btn.addEventListener('click', function (e) {
+//     console.log(this);
+//     this.style.backgroundColor = 'red';
+//     function showThis() {
+//         console.log(this);
+//     }
+//     showThis();
+// });
+
+//1-> Просто вызов функции вывод:-> window or undefined
 //2-> Метод объекта - this = объекту
+//3-> Конструктор (new) - this = новый созданный объект
+//4-> Указание конкретнего контекста - call(), apply(), bind()
+
+
+
+
+let age = document.getElementById('age');
+
+function showUser(surname, name) {
+    alert("Пользователь " + surname + " " + name + ", его возраст " + this.value);
+}
+showUser.apply(age, ['Ussen', 'Nurgissa']);
