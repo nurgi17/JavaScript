@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabletop.js example</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+  <h1 class="header">Site Name</h1>
+  <p class="bodytext">Description of the site</p>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+  <script type='text/javascript'>    
+  var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1BrZsHhmLC76PzIPoForbeYACnCAsFXbMR_YHN77RWig/edit?usp=sharing';
+
+  function init() {
+    Tabletop.init( { key: publicSpreadsheetUrl,
+                     callback: showInfo,
+                     simpleSheet: true } )
+  }
+
+  function showInfo(data, tabletop) {
+    var header = document.querySelector('.header')
+    var bodyText = document.querySelector('.bodytext')
+    data.forEach(d => {
+      header.innerHTML = d.Name
+      bodyText.innerHTML = d.Category
+    })
+  }
+
+  window.addEventListener('DOMContentLoaded', init)
+</script>
+</body>
+</html>
