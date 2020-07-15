@@ -38,12 +38,12 @@ console.log('a', a, 'b', b, 'c', c, 'd', d)
 const game = {
     suspects: [
       {
-          name: 'Rusty',
-          color: 'orange'
+        name: 'Rusty',
+        color: 'orange'
       }, 
       {
-          name: 'Miss Scarlet',
-          color: 'red'
+        name: 'Miss Scarlet',
+        color: 'red'
       }
     ]
 }
