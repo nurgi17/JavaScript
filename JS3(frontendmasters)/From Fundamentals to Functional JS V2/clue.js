@@ -136,3 +136,19 @@ var arr1 = _.filter([1,2,3,4], function(val){
 })
 console.log(arr1)
 
+// _.eachRight() -> implementing
+// _.reduce() -> implementing
+const _ = {}
+_.reduce = function(list, cb, initial) {
+    let memo = initial
+    for (let i = 0; i < list.length; i++) {
+        if (i === 0 && memo === undefined) {
+            memo = list[0]
+        } else {
+            memo = cb(list[i], memo)
+        }
+    }
+    return memo
+}
+var result = _.reduce([2,3,5], (v, sum) => v + sum)
+console.log(result)
