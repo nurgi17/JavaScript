@@ -332,13 +332,14 @@ console.log(avgSoFar()); // => should log 8
 
 // CHALLENGE 17
 function makeFuncTester(arrOfTests) {
-    const obj = {}
-    return func => {
+    return func => { // callback
+        let yes = false
         arrOfTests.forEach(e => {
-            e.forEach(ee => {
-                func(ee)
-            })
+            for (let i = 0; i < e.length - 1; i++) {
+                if (func(e[i]) === e[i + 1]) yes = true
+            }
         })
+        return yes
     }
 }
 
@@ -356,57 +357,98 @@ console.log(shouldCapitalizeLast(capLastAttempt2)); // => should log true
 
 // CHALLENGE 18
 function makeHistory(limit) {
-
+    const arr = []
+    return str => {
+        if (str !== 'undo') {
+            if (arr.length < limit) {
+                arr.push(str)
+            } else {
+                arr.shift() // delete element from front side | //unshift() -> put new el in array from front
+                arr.push(str)
+            }
+            return `${str} done`
+        } else {
+            if (arr.length === 0) {
+                return 'nothing to undo'
+            }
+            let temp = arr[arr.length - 1]
+            arr.pop() // delete element from back of arr
+            return `${temp} undone`
+        }
+    }
 }
 
-// /*** Uncomment these to check your work! ***/
-// const myActions = makeHistory(2);
-// console.log(myActions('jump')); // => should log 'jump done'
-// console.log(myActions('undo')); // => should log 'jump undone'
-// console.log(myActions('walk')); // => should log 'walk done'
-// console.log(myActions('code')); // => should log 'code done'
-// console.log(myActions('pose')); // => should log 'pose done'
-// console.log(myActions('undo')); // => should log 'pose undone'
-// console.log(myActions('undo')); // => should log 'code undone'
-// console.log(myActions('undo')); // => should log 'nothing to undo'
+/*** Uncomment these to check your work! ***/
+const myActions = makeHistory(2);
+console.log(myActions('jump')); // => should log 'jump done'
+console.log(myActions('undo')); // => should log 'jump undone'
+console.log(myActions('walk')); // => should log 'walk done'
+console.log(myActions('code')); // => should log 'code done'
+console.log(myActions('pose')); // => should log 'pose done'
+console.log(myActions('undo')); // => should log 'pose undone'
+console.log(myActions('undo')); // => should log 'code undone'
+console.log(myActions('undo')); // => should log 'nothing to undo'
 
 
 // CHALLENGE 19
 function blackjack(array) {
-
+    let count = 0
+    return (arg1, arg2) => { // Dealer function
+        let temp = 0
+        let yes = false
+        return () => { // Player function
+            if (temp === 0) {
+                temp = arg1 + arg2
+                return temp
+            } else {
+                temp += array[count]
+                if (temp <= 21) {
+                    count++
+                    return temp
+                } else {
+                    if (!yes) {
+                        yes = true
+                        count++
+                        return 'bust'
+                    }
+                    return 'you are done!'
+                }
+            }
+        }
+    }
 }
 
-// /*** Uncomment these to check your work! ***/
+/*** Uncomment these to check your work! ***/
 
-// /*** DEALER ***/
-// const deal = blackjack([2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11]);
+/*** DEALER ***/
+const deal = blackjack([2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11]);
 
-// /*** PLAYER 1 ***/
-// const i_like_to_live_dangerously = deal(4, 5);
-// console.log(i_like_to_live_dangerously()); // => should log 9
-// console.log(i_like_to_live_dangerously()); // => should log 11
-// console.log(i_like_to_live_dangerously()); // => should log 17
-// console.log(i_like_to_live_dangerously()); // => should log 18
-// console.log(i_like_to_live_dangerously()); // => should log 'bust'
-// console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
-// console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
+/*** PLAYER 1 ***/
+const i_like_to_live_dangerously = deal(4, 5);
+console.log(i_like_to_live_dangerously()); // => should log 9
+console.log(i_like_to_live_dangerously()); // => should log 11
+console.log(i_like_to_live_dangerously()); // => should log 17
+console.log(i_like_to_live_dangerously()); // => should log 18
+console.log(i_like_to_live_dangerously()); // => should log 'bust'
+console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
+console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
 
-// /*** BELOW LINES ARE FOR THE BONUS ***/
+/*** BELOW LINES ARE FOR THE BONUS ***/
 
-// /*** PLAYER 2 ***/
-// const i_TOO_like_to_live_dangerously = deal(2, 2);
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 4
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 15
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 19
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 'bust'
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
-// console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
+/*** PLAYER 2 ***/
+const i_TOO_like_to_live_dangerously = deal(2, 2);
+console.log(i_TOO_like_to_live_dangerously()); // => should log 4
+console.log(i_TOO_like_to_live_dangerously()); // => should log 15
+console.log(i_TOO_like_to_live_dangerously()); // => should log 19
+console.log(i_TOO_like_to_live_dangerously()); // => should log 'bust'
+console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
+console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
 
-// /*** PLAYER 3 ***/
-// const i_ALSO_like_to_live_dangerously = deal(3, 7);
-// console.log(i_ALSO_like_to_live_dangerously()); // => should log 10
-// console.log(i_ALSO_like_to_live_dangerously()); // => should log 13
-// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'bust'
-// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
-// console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
+/*** PLAYER 3 ***/
+const i_ALSO_like_to_live_dangerously = deal(3, 7);
+console.log(i_ALSO_like_to_live_dangerously()); // => should log 10
+console.log(i_ALSO_like_to_live_dangerously()); // => should log 13
+console.log(i_ALSO_like_to_live_dangerously()); // => should log 'bust'
+console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
+console.log(i_ALSO_like_to_live_dangerously()); // => should log 'you are done!
 
