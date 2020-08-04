@@ -46,5 +46,60 @@ function data () {
 var {
     a: first = 42,
     b: second,
+    c: {
+        d,
+        e
+    } = {},
     ...third // would be object
-} = data() // equivalent from top commented code
+} = data() || {} // equivalent from top commented code
+
+function data ({
+    a,
+    b
+} = {}, x){
+
+}
+
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3
+}
+
+var {
+    a,
+    b: b,
+    b: w,
+    c
+} = obj
+
+// flat and flatMap
+var nestedArray = [
+    1, [2,3], [[]], [4, [5]], 6
+]
+nestedArray.flat()
+
+[1,2,3].map(function tuples(v) {
+    return [v*2, String(v*2)]
+})
+
+[1,2,3].map(function tuples(v) {
+    return [v*2, String(v*2)]
+}).flat()
+
+[1,2,3].flatMap(function tuples(v) {
+    return [v*2, String(v*2)]
+})
+
+// Iterators & Generators
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3,
+    *[Symbol.iterator](){
+        for (let key of Object.keys(this)) {
+            yield this[key]
+        }
+    }
+}
+console.log([ ...obj ])
