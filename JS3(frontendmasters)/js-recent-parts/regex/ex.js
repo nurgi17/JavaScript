@@ -23,9 +23,16 @@ for (let power of powers(poem)) {
 
 // Hints:
 //
-// function *powers(poem) { .. }
-//
-// re = / .. /gs
-//
-// while (match = re.exec(poem)) { .. }
-//
+function *powers(poem) { 
+	var re = /(?<=power of )(?<thing>(a )?\w+).*?(?<=can )(?<verb>\w+)/gs
+	var match
+	while (match = re.exec(poem)) {
+		let {
+			groups: {
+				thing,
+				verb
+			}
+		} = match
+		yield `${thing}: ${verb}`
+	}
+}
