@@ -9,7 +9,6 @@ function sumFunc(arr) {
     sum += i
   }
   return sum
-
 }
 
 // Uncomment the lines below to test your work
@@ -153,22 +152,22 @@ Words.prototype[Symbol.iterator] = function() {
 // CHALLENGE 7
 
 function valueAndPrevIndex(array){
-    let i = 0
-    let e
+  let i = 0
+  let e
 	const iterator = {
-    sentence: () => {
-        if (i === 0) {
-            e = array[i] + ' the first'
-		    i++
-            return e
-        } else {
-            e = array[i] + ' was found after index ' + (i-1)
-            i++
-            return e
-        }
+  sentence: () => {
+    if (i === 0) {
+      e = array[i] + ' the first'
+		  i++
+      return e
+      } else {
+        e = array[i] + ' was found after index ' + (i-1)
+        i++
+        return e
+      }
     }
-    }
-    return iterator
+  }
+  return iterator
 }
 
 const returnedSentence = valueAndPrevIndex([4,5,6])
@@ -180,11 +179,16 @@ console.log(returnedSentence.sentence());
 //CHALLENGE 8
 
 function* createConversation(string) {
-
-
+  if (string == 'english') yield 'hello there'
+  yield 'gibberish'
 }
 
-console.log(createConversation('english').next());
+const iterator = createConversation('english')
+const start = setInterval(() => {
+  var next = iterator.next()
+  if (next.done == true) clearInterval(start)
+  else console.log(next.value)
+}, 3000)
 
 
 
